@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script>
+        // Автоматический роутинг для игр
+        const path = window.location.pathname;
+        const match = path.match(/\/games\/(\d+)\/([^\/]+)\/?$/);
+        
+        if (match) {
+            // Перенаправляем на шаблон с параметрами
+            window.location.href = `/tracking/games/template.html?id=${match[1]}&name=${match[2]}`;
+        } else {
+            window.location.href = '/tracking/404.html';
+        }
+    </script>
+</head>
+<body>Redirecting...</body>
+</html>
