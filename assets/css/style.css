@@ -1,16 +1,300 @@
-:root{
-  --bg-dark:#111217; --bg-card-dark:#232527; --roblox-blue:#00A2FF; --text-light:#111827; --text-dark:#e6eef8;
+:root {
+    --bg-light: #ffffff;
+    --bg-dark: #191B1D;
+    --card-light: #f8fafc;
+    --card-dark: #232527;
+    --text-light: #111827;
+    --text-dark: #e6eef8;
+    --muted-light: #6b7280;
+    --muted-dark: #9ca3af;
+    --roblox-blue: #00A2FF;
 }
-html{background:var(--bg-dark); color:var(--text-dark);}
-.container{max-width:1100px;margin:0 auto;padding:16px}
-.site-header{background:var(--bg-card-dark);padding:12px 0}
-.brand{font-weight:700;color:var(--roblox-blue);text-decoration:none}
-.controls{display:flex;gap:8px;align-items:center}
-.controls input{padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,.06);}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
-.card{background:var(--bg-card-dark);padding:12px;border-radius:10px;display:flex;gap:10px;align-items:center;text-decoration:none;color:inherit}
-.card img{width:110px;height:62px;object-fit:cover;border-radius:8px}
-.btn{background:var(--roblox-blue);color:white;padding:8px 12px;border-radius:8px;text-decoration:none}
-.muted{color:rgba(255,255,255,.6)}
-.form-row input, .form-row textarea{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,.04);background:transparent;color:inherit}
-@media (max-width:640px){.controls{flex-direction:column;align-items:stretch}}
+
+/* Анимации */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+@keyframes slideIn {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(0); }
+}
+
+/* Основные стили */
+* {
+    transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
+/* Карточки */
+.stat-card {
+    transition: all 0.3s ease;
+    animation: fadeInUp 0.5s ease-out;
+    border: 1px solid transparent;
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+    border-color: rgba(0, 162, 255, 0.3);
+}
+
+/* Слайдер */
+.slider-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    aspect-ratio: 16/9;
+    background: #2a2a2a;
+}
+
+.slider-wrapper {
+    display: flex;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    height: 100%;
+}
+
+.slider-image {
+    min-width: 100%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.slider-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    font-size: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.2s;
+    opacity: 0;
+}
+
+.slider-container:hover .slider-button {
+    opacity: 1;
+}
+
+.slider-button:hover {
+    background: rgba(0, 162, 255, 0.8);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.slider-button.prev { left: 16px; }
+.slider-button.next { right: 16px; }
+
+/* Загрузка */
+.loading {
+    position: relative;
+    overflow: hidden;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+/* Кнопки */
+.btn {
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    transition: all 0.2s;
+    cursor: pointer;
+    border: none;
+}
+
+.btn-primary {
+    background: var(--roblox-blue);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #0088cc;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px -5px rgba(0, 162, 255, 0.4);
+}
+
+/* Бейджи */
+.badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    background: rgba(0, 162, 255, 0.1);
+    color: var(--roblox-blue);
+}
+
+/* Прогресс бар */
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background: var(--roblox-blue);
+    border-radius: 999px;
+    transition: width 0.3s ease;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .stat-card { padding: 1rem; }
+    .slider-button { width: 36px; height: 36px; font-size: 24px; }
+}
+
+/* Стили для Graph */
+.chart-container {
+    position: relative;
+    height: 200px;
+    width: 100%;
+}
+
+/* Owner line */
+.owner-line {
+    font-size: 0.95rem;
+    color: #111;
+}
+
+html.dark .owner-line {
+    color: #ffffff;
+}
+
+.owner-line a {
+    color: #00A2FF;
+    font-weight: 600;
+}
+
+/* Maturity badge */
+.maturity-badge {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: rgba(0, 162, 255, 0.1);
+    color: var(--roblox-blue);
+    font-weight: 600;
+    font-size: 0.875rem;
+}
+
+/* Сортировка */
+.sort-btn {
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+.sort-btn.active {
+    background: var(--roblox-blue);
+    color: white;
+}
+
+.sort-btn:not(.active):hover {
+    background: rgba(0, 162, 255, 0.1);
+}
+
+/* Сетка игр */
+.game-card {
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.game-card:hover {
+    transform: translateY(-6px) scale(1.02);
+    border-color: var(--roblox-blue);
+    box-shadow: 0 20px 30px -10px rgba(0, 162, 255, 0.2);
+}
+
+.game-card img {
+    transition: transform 0.5s ease;
+}
+
+.game-card:hover img {
+    transform: scale(1.05);
+}
+
+/* Скроллбар */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--card-dark);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #4a4a4a;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #5a5a5a;
+}
+
+/* Уведомления */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 16px 24px;
+    border-radius: 12px;
+    background: var(--card-dark);
+    color: white;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transform: translateX(120%);
+    transition: transform 0.3s ease;
+    z-index: 1000;
+}
+
+.notification.show {
+    transform: translateX(0);
+}
+
+.notification.success { border-left: 4px solid #10b981; }
+.notification.error { border-left: 4px solid #ef4444; }
+.notification.info { border-left: 4px solid #3b82f6; }
