@@ -1,11 +1,22 @@
-[
-  {
-    "id": "71240146627158",
-    "universeId": "9678437015",
-    "name": "HD Admin Chaos Tower",
-    "thumbnail": "https://tr.rbxcdn.com/180DAY-ac99810b043fcc8b90d47a062764b279/768/432/Image/Webp/noFilter",
-    "visits": 727676,
-    "playing": 1972,
-    "price": 2
-  }
-]
+{
+  "games": [
+    {
+      "id": "71240146627158",
+      "universeId": "9678437015",
+      "name": "HD Admin Chaos Tower",
+      "added": "2024-01-15",
+      "owner": "Tower Obby Productions",
+      "ownerId": "4828786884",
+      "featured": true
+    },
+    {
+      "id": "1234567890",
+      "universeId": "1234567890",
+      "name": "Tower Obby Simulator",
+      "added": "2024-01-20",
+      "owner": "Tower Obby Productions",
+      "ownerId": "4828786884",
+      "featured": false
+    }
+  ]
+}
