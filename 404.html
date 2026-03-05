@@ -1,15 +1,88 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en" class="dark">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>404 — Not found</title>
-  <link rel="stylesheet" href="/tracking/assets/css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found | Tower Obby Productions</title>
+    
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/tracking/assets/css/style.css">
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="https://towerobbyproductions.github.io/games/site/assets/icon/favicon64%D1%8564.ico">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'roblox-dark': '#191B1D',
+                        'roblox-dark-secondary': '#232527',
+                        'roblox-blue': '#00A2FF',
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-<body class="page-root">
-  <main class="container mt-12 text-center">
-    <h1>404</h1>
-    <p>Page not found. <a href="/tracking/home/">Go home</a></p>
-  </main>
+<body class="bg-white dark:bg-roblox-dark text-gray-900 dark:text-white min-h-screen flex items-center justify-center">
+    <div class="text-center px-4">
+        <!-- Анимированная 404 -->
+        <div class="mb-8 relative">
+            <h1 class="text-9xl font-black text-roblox-blue opacity-20 animate-pulse">404</h1>
+            <div class="absolute inset-0 flex items-center justify-center">
+                <div class="w-32 h-32 bg-roblox-blue/10 rounded-full animate-ping"></div>
+            </div>
+        </div>
+        
+        <h2 class="text-4xl font-bold mb-4 bg-gradient-to-r from-roblox-blue to-purple-500 bg-clip-text text-transparent">
+            Page Not Found
+        </h2>
+        
+        <p class="text-xl text-gray-600 dark:text-gray-400 mb-8 max-w-lg mx-auto">
+            The page you're looking for doesn't exist or has been moved.
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="/tracking/home/" 
+               class="px-8 py-4 bg-roblox-blue hover:bg-blue-600 text-white rounded-xl font-semibold transition-all transform hover:scale-105 shadow-lg">
+                ← Go to Home
+            </a>
+            <a href="/tracking/request-a-game/" 
+               class="px-8 py-4 bg-gray-200 dark:bg-roblox-dark-secondary hover:bg-gray-300 dark:hover:bg-gray-700 rounded-xl font-semibold transition-all">
+                Request a Game
+            </a>
+        </div>
+        
+        <!-- Поиск похожих игр -->
+        <div class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-800">
+            <h3 class="text-lg font-semibold mb-4">Popular Games You Might Like</h3>
+            <div id="popularGames" class="flex flex-wrap gap-3 justify-center">
+                <!-- JS заполнит -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Показать популярные игры из кэша или заглушки
+        const popularGames = [
+            { id: '71240146627158', name: 'HD Admin Chaos Tower' },
+            { id: '123456789', name: 'Tower Obby Simulator' },
+            { id: '987654321', name: 'Chaos Obby Rush' }
+        ];
+        
+        const container = document.getElementById('popularGames');
+        popularGames.forEach(game => {
+            const link = document.createElement('a');
+            link.href = `/tracking/games/${game.id}/${game.name.replace(/ /g, '-')}/`;
+            link.className = 'px-4 py-2 bg-gray-100 dark:bg-roblox-dark-secondary rounded-lg hover:bg-roblox-blue hover:text-white transition-colors';
+            link.textContent = game.name;
+            container.appendChild(link);
+        });
+    </script>
 </body>
 </html>
