@@ -1,10 +1,22 @@
-<!-- В секции статистики -->
-<div class="stat-card" id="totalGames">0</div>
-<div class="stat-card" id="totalCommunities">0</div>
-<div class="stat-card" id="totalPlayers">0</div>
-<div class="stat-card" id="totalVisits">0</div>
-
-<!-- Сетки -->
-<div id="gamesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
-<div id="communitiesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
-<div id="recentGames" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"></div>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Redirecting...</title>
+    <script>
+        // Получаем ID игры из URL
+        const path = window.location.pathname;
+        const match = path.match(/\/games\/(\d+)\/([^\/]+)/);
+        
+        if (match) {
+            // Перенаправляем на шаблон
+            window.location.replace('/tracking/games/template.html');
+        } else {
+            window.location.replace('/tracking/404.html');
+        }
+    </script>
+</head>
+<body>
+    <p>Redirecting...</p>
+</body>
+</html>
