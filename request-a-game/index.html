@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Request a game</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="page-root">
+  <div class="container mt-6">
+    <h1>Request a game</h1>
+    <form id="requestForm">
+      <div class="form-row">
+        <input name="firstName" placeholder="First name" required />
+        <input name="lastName" placeholder="Last name" required />
+      </div>
+      <div class="form-row mt-2">
+        <input name="robloxUrlOrId" placeholder="Roblox game URL or ID" required />
+      </div>
+      <div class="form-row mt-2">
+        <textarea name="notes" placeholder="Optional notes"></textarea>
+      </div>
+      <div class="mt-4">
+        <button class="btn" type="submit">Send request</button>
+      </div>
+    </form>
+
+    <div id="result" class="mt-4"></div>
+
+    <p class="muted mt-6">Requests are sent to the site owner via Google Apps Script (email). After review I will add the game to the tracking list.</p>
+  </div>
+
+  <script type="module">
+  import { postRequestForm } from '../assets/js/site.js';
+  document.getElementById('requestForm').addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    const fd = new FormData(e.target);
+    const data = Object.fromEntries(fd.entries());
+    const res = await postRequestForm(data);
+    document.getElementById('result').textContent = res.message;
+  });
+  </script>
+</body>
+</html>
