@@ -1,24 +1,171 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" class="dark">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Game — Tracking</title>
-  <link rel="stylesheet" href="../../assets/css/style.css">
-  <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading Game... - GameTracker</title>
+    
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/tracking/assets/css/style.css">
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="https://towerobbyproductions.github.io/games/site/assets/icon/favicon64%D1%8564.ico">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'roblox-dark': '#191B1D',
+                        'roblox-dark-secondary': '#232527',
+                        'roblox-blue': '#00A2FF',
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-<body class="page-root">
-  <header class="site-header container">
-    <a class="brand" href="/tracking/home/">Tracking</a>
-  </header>
+<body class="bg-white dark:bg-roblox-dark text-gray-900 dark:text-white">
+    <!-- Навигация (та же что в home) -->
+    <nav class="bg-gray-100 dark:bg-roblox-dark-secondary shadow-lg sticky top-0 z-50">
+        <!-- ... скопировать навигацию из home ... -->
+    </nav>
 
-  <main class="container mt-6" id="app">
-    <div id="gameCard">Loading...</div>
-  </main>
+    <!-- Основной контент -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Хлебные крошки -->
+        <div class="text-sm breadcrumbs mb-6">
+            <a href="/tracking/home/" class="text-gray-500 dark:text-gray-400 hover:text-roblox-blue">Home</a>
+            <span class="mx-2 text-gray-400">/</span>
+            <a href="/tracking/home/#games" class="text-gray-500 dark:text-gray-400 hover:text-roblox-blue">Games</a>
+            <span class="mx-2 text-gray-400">/</span>
+            <span class="text-roblox-blue font-semibold" id="currentGameName">Loading...</span>
+        </div>
 
-  <footer class="site-footer container">© <span id="year"></span> Tower Obby Productions</footer>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Левая колонка: изображения -->
+            <div class="lg:col-span-2">
+                <!-- Слайдер -->
+                <div class="slider-container bg-gray-200 dark:bg-roblox-dark-secondary rounded-xl overflow-hidden mb-6">
+                    <div class="slider-wrapper" id="sliderWrapper"></div>
+                    <button class="slider-button prev" onclick="changeSlide(-1)">‹</button>
+                    <button class="slider-button next" onclick="changeSlide(1)">›</button>
+                </div>
 
-  <script type="module" src="../../assets/js/site.js"></script>
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+                <!-- Описание -->
+                <div class="bg-gray-100 dark:bg-roblox-dark-secondary rounded-xl p-6">
+                    <h2 class="text-xl font-semibold mb-4">📝 Description</h2>
+                    <p id="gameDescription" class="text-gray-700 dark:text-gray-300 leading-relaxed">Loading...</p>
+                    
+                    <!-- Дополнительная информация -->
+                    <div class="mt-6 grid grid-cols-2 gap-4">
+                        <div>
+                            <span class="text-sm text-gray-500 dark:text-gray-400">Created</span>
+                            <div id="created" class="font-semibold">-</div>
+                        </div>
+                        <div>
+                            <span class="text-sm text-gray-500 dark:text-gray-400">Updated</span>
+                            <div id="updated" class="font-semibold">-</div>
+                        </div>
+                        <div>
+                            <span class="text-sm text-gray-500 dark:text-gray-400">Genre</span>
+                            <div id="genre" class="font-semibold">-</div>
+                        </div>
+                        <div>
+                            <span class="text-sm text-gray-500 dark:text-gray-400">Subgenre</span>
+                            <div id="subgenre" class="font-semibold">-</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Правая колонка: статистика -->
+            <div class="space-y-6">
+                <!-- Заголовок -->
+                <div>
+                    <h1 id="gameTitle" class="text-3xl font-bold mb-2">Loading...</h1>
+                    <div class="owner-line">
+                        By <a id="ownerLink" href="#" target="_blank" rel="noopener noreferrer" class="text-roblox-blue font-semibold">Loading...</a>
+                    </div>
+                </div>
+
+                <!-- Кнопка Play -->
+                <a id="playLink" href="#" target="_blank" rel="noopener noreferrer" class="block">
+                    <button class="w-full bg-roblox-blue hover:bg-blue-600 text-white font-bold py-4 px-6 rounded-xl text-xl shadow-lg transition-all transform hover:scale-105">
+                        ▶ Play Now
+                    </button>
+                </a>
+
+                <!-- Статистика -->
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="stat-card bg-gray-100 dark:bg-roblox-dark-secondary rounded-xl p-4">
+                        <div class="text-sm text-gray-500 dark:text-gray-400 mb-1">Active</div>
+                        <div id="activePlayers" class="text-2xl font-bold text-roblox-blue">-</div>
+                    </div>
+                    <div class="stat-card bg-gray-100 dark:bg-roblox-dark-secondary rounded-xl p-4">
+                        <div class="text-sm text-gray-500 dark:text-gray-400 mb-1">Favorites</div>
+                        <div id="favorites" class="text-2xl font-bold text-yellow-500">-</div>
+                    </div>
+                    <div class="stat-card bg-gray-100 dark:bg-roblox-dark-secondary rounded-xl p-4">
+                        <div class="text-sm text-gray-500 dark:text-gray-400 mb-1">Visits</div>
+                        <div id="visits" class="text-2xl font-bold text-green-500">-</div>
+                    </div>
+                    <div class="stat-card bg-gray-100 dark:bg-roblox-dark-secondary rounded-xl p-4">
+                        <div class="text-sm text-gray-500 dark:text-gray-400 mb-1">Server Size</div>
+                        <div id="serverSize" class="text-2xl font-bold text-purple-500">-</div>
+                    </div>
+                </div>
+
+                <!-- График активности -->
+                <div class="bg-gray-100 dark:bg-roblox-dark-secondary rounded-xl p-6">
+                    <h3 class="font-semibold mb-4">📊 Player Activity (24h)</h3>
+                    <canvas id="activityChart" class="w-full h-48"></canvas>
+                </div>
+
+                <!-- Рекорды -->
+                <div class="bg-gray-100 dark:bg-roblox-dark-secondary rounded-xl p-6">
+                    <h3 class="font-semibold mb-4">🏆 Records</h3>
+                    <div class="space-y-3">
+                        <div class="flex justify-between">
+                            <span>Peak Players:</span>
+                            <span id="peakPlayers" class="font-bold text-roblox-blue">-</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Daily Visits:</span>
+                            <span id="dailyVisits" class="font-bold text-green-500">-</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Rating:</span>
+                            <span id="rating" class="font-bold text-yellow-500">-</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Футер (такой же) -->
+    <footer class="bg-gray-100 dark:bg-roblox-dark-secondary mt-12 border-t border-gray-200 dark:border-gray-700">
+        <!-- ... скопировать футер из home ... -->
+    </footer>
+
+    <!-- Скрипты -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/tracking/assets/js/site.js"></script>
+    <script src="/tracking/assets/js/charts.js"></script>
+    <script>
+        // Получаем ID игры из URL
+        const pathParts = window.location.pathname.split('/');
+        const gameId = pathParts[pathParts.indexOf('games') + 1];
+        
+        // Загружаем данные игры
+        document.addEventListener('DOMContentLoaded', () => {
+            loadGameData(gameId);
+        });
+    </script>
 </body>
 </html>
