@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Tracking — Home</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="page-root">
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="../">Tracking</a>
+      <div class="controls">
+        <input id="search" placeholder="Search games or ids..." />
+        <select id="sortBy">
+          <option value="visits">Top by visits</option>
+          <option value="playing">Top by active</option>
+        </select>
+        <a class="btn" href="../request-a-game/">Request a game</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container mt-6">
+    <section>
+      <h2>Top games</h2>
+      <div id="topList" class="grid"></div>
+    </section>
+
+    <section class="mt-6">
+      <h2>All games</h2>
+      <div id="gamesGrid" class="grid"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">© <span id="year"></span> Tower Obby Productions</div>
+  </footer>
+
+  <script type="module" src="../assets/js/site.js"></script>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
