@@ -1,44 +1,199 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" class="dark">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Tracking — Home</title>
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Tracker - Tower Obby Productions</title>
+    
+    <!-- Meta -->
+    <meta name="description" content="Track your favorite Roblox games and communities">
+    <meta name="keywords" content="roblox, game tracker, stats, analytics">
+    
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/tracking/assets/css/style.css">
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="https://towerobbyproductions.github.io/games/site/assets/icon/favicon64%D1%8564.ico">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CMD2XJLJYW"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-CMD2XJLJYW');
+    </script>
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'roblox-dark': '#191B1D',
+                        'roblox-dark-secondary': '#232527',
+                        'roblox-blue': '#00A2FF',
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-<body class="page-root">
-  <header class="site-header">
-    <div class="container">
-      <a class="brand" href="../">Tracking</a>
-      <div class="controls">
-        <input id="search" placeholder="Search games or ids..." />
-        <select id="sortBy">
-          <option value="visits">Top by visits</option>
-          <option value="playing">Top by active</option>
-        </select>
-        <a class="btn" href="../request-a-game/">Request a game</a>
-      </div>
-    </div>
-  </header>
+<body class="bg-white dark:bg-roblox-dark text-gray-900 dark:text-white">
+    <!-- Навигация -->
+    <nav class="bg-gray-100 dark:bg-roblox-dark-secondary shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Лого -->
+                <div class="flex items-center space-x-8">
+                    <a href="/tracking/home/" class="text-2xl font-bold bg-gradient-to-r from-roblox-blue to-purple-500 bg-clip-text text-transparent">
+                        GameTracker
+                    </a>
+                    <div class="hidden md:flex space-x-4">
+                        <a href="/tracking/home/" class="px-3 py-2 rounded-md text-sm font-medium text-roblox-blue bg-roblox-blue/10">Home</a>
+                        <a href="#games" class="px-3 py-2 rounded-md text-sm font-medium hover:text-roblox-blue transition">Games</a>
+                        <a href="#communities" class="px-3 py-2 rounded-md text-sm font-medium hover:text-roblox-blue transition">Communities</a>
+                        <a href="/tracking/request-a-game/" class="px-3 py-2 rounded-md text-sm font-medium hover:text-roblox-blue transition">Request Game</a>
+                    </div>
+                </div>
+                
+                <!-- Управление -->
+                <div class="flex items-center space-x-3">
+                    <button id="themeToggle" class="p-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition">
+                        🌙
+                    </button>
+                    <button id="langToggle" class="px-3 py-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition font-medium">
+                        RU
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
 
-  <main class="container mt-6">
-    <section>
-      <h2>Top games</h2>
-      <div id="topList" class="grid"></div>
+    <!-- Hero Section -->
+    <section class="relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-roblox-blue/20 to-purple-500/20 blur-3xl"></div>
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+            <div class="text-center">
+                <h1 class="text-5xl md:text-6xl font-extrabold mb-6 bg-gradient-to-r from-roblox-blue via-purple-500 to-pink-500 bg-clip-text text-transparent">
+                    Roblox Game Tracker
+                </h1>
+                <p class="text-xl text-gray-600 dark:text-gray-400 mb-8 max-w-3xl mx-auto">
+                    Track statistics, monitor performance, and discover trending games and communities in real-time
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#games" class="px-8 py-4 bg-roblox-blue hover:bg-blue-600 text-white rounded-xl font-semibold transition-all transform hover:scale-105 shadow-lg">
+                        Browse Games
+                    </a>
+                    <a href="/tracking/request-a-game/" class="px-8 py-4 bg-gray-200 dark:bg-roblox-dark-secondary hover:bg-gray-300 dark:hover:bg-gray-700 rounded-xl font-semibold transition-all">
+                        Add Your Game
+                    </a>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <section class="mt-6">
-      <h2>All games</h2>
-      <div id="gamesGrid" class="grid"></div>
+    <!-- Статистика -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="stat-card bg-gray-100 dark:bg-roblox-dark-secondary rounded-xl p-6 text-center">
+                <div class="text-3xl font-bold text-roblox-blue" id="totalGames">0</div>
+                <div class="text-sm text-gray-600 dark:text-gray-400">Tracked Games</div>
+            </div>
+            <div class="stat-card bg-gray-100 dark:bg-roblox-dark-secondary rounded-xl p-6 text-center">
+                <div class="text-3xl font-bold text-green-500" id="totalCommunities">0</div>
+                <div class="text-sm text-gray-600 dark:text-gray-400">Communities</div>
+            </div>
+            <div class="stat-card bg-gray-100 dark:bg-roblox-dark-secondary rounded-xl p-6 text-center">
+                <div class="text-3xl font-bold text-purple-500" id="totalPlayers">0</div>
+                <div class="text-sm text-gray-600 dark:text-gray-400">Active Players</div>
+            </div>
+            <div class="stat-card bg-gray-100 dark:bg-roblox-dark-secondary rounded-xl p-6 text-center">
+                <div class="text-3xl font-bold text-yellow-500" id="totalVisits">0</div>
+                <div class="text-sm text-gray-600 dark:text-gray-400">Total Visits</div>
+            </div>
+        </div>
     </section>
-  </main>
 
-  <footer class="site-footer">
-    <div class="container">© <span id="year"></span> Tower Obby Productions</div>
-  </footer>
+    <!-- Топ игры -->
+    <section id="games" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="flex justify-between items-center mb-8">
+            <h2 class="text-3xl font-bold">🔥 Top Games</h2>
+            <div class="flex gap-2">
+                <button class="sort-btn active px-4 py-2 rounded-lg bg-roblox-blue text-white" data-sort="players">By Players</button>
+                <button class="sort-btn px-4 py-2 rounded-lg bg-gray-200 dark:bg-roblox-dark-secondary" data-sort="visits">By Visits</button>
+                <button class="sort-btn px-4 py-2 rounded-lg bg-gray-200 dark:bg-roblox-dark-secondary" data-sort="favorites">By Favorites</button>
+            </div>
+        </div>
+        
+        <div id="gamesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- JS заполнит -->
+        </div>
+    </section>
 
-  <script type="module" src="../assets/js/site.js"></script>
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+    <!-- Топ сообщества -->
+    <section id="communities" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <h2 class="text-3xl font-bold mb-8">👥 Top Communities</h2>
+        <div id="communitiesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- JS заполнит -->
+        </div>
+    </section>
+
+    <!-- Недавно добавленные -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <h2 class="text-3xl font-bold mb-8">✨ Recently Added</h2>
+        <div id="recentGames" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <!-- JS заполнит -->
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer class="bg-gray-100 dark:bg-roblox-dark-secondary mt-12 border-t border-gray-200 dark:border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="font-bold text-lg mb-4">GameTracker</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">Track your favorite Roblox games and communities in real-time.</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="/tracking/home/" class="text-gray-600 dark:text-gray-400 hover:text-roblox-blue">Home</a></li>
+                        <li><a href="#games" class="text-gray-600 dark:text-gray-400 hover:text-roblox-blue">Games</a></li>
+                        <li><a href="#communities" class="text-gray-600 dark:text-gray-400 hover:text-roblox-blue">Communities</a></li>
+                        <li><a href="/tracking/request-a-game/" class="text-gray-600 dark:text-gray-400 hover:text-roblox-blue">Request Game</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Statistics</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex justify-between"><span>Games:</span> <span id="footerGames">0</span></li>
+                        <li class="flex justify-between"><span>Communities:</span> <span id="footerCommunities">0</span></li>
+                        <li class="flex justify-between"><span>Total Players:</span> <span id="footerPlayers">0</span></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Contact</h4>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">
+                        <a href="https://www.roblox.com/communities/102552180/Tower-Obby-Productions" class="hover:text-roblox-blue">
+                            Tower Obby Productions
+                        </a>
+                    </p>
+                </div>
+            </div>
+            <div class="text-center pt-8 mt-8 border-t border-gray-200 dark:border-gray-700">
+                <p class="text-sm text-gray-600 dark:text-gray-400">
+                    © <span id="year"></span> <a href="https://www.roblox.com/communities/102552180/Tower-Obby-Productions" class="text-roblox-blue font-semibold hover:underline">Tower Obby Productions</a>. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Скрипты -->
+    <script src="/tracking/assets/js/site.js"></script>
 </body>
 </html>
+
