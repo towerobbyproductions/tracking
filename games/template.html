@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Game — Tracking</title>
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="page-root">
+  <header class="site-header container">
+    <a class="brand" href="/tracking/home/">Tracking</a>
+  </header>
+
+  <main class="container mt-6" id="app">
+    <div id="gameCard">Loading...</div>
+  </main>
+
+  <footer class="site-footer container">© <span id="year"></span> Tower Obby Productions</footer>
+
+  <script type="module" src="../../assets/js/site.js"></script>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
